@@ -37,30 +37,29 @@ CommonJs format
 import { createRequire } from "node:module";
 const cjs_require = createRequire(import.meta.url);
 const _M_ = cjs_require("lib-name");
-const _D_ = _M_.default || _M_;
-export {
-  _D_ as default,
-};
 export const foo = _M_.foo;
 export const bar = _M_.bar;
+export const keyword_default = _M_.default || _M_;
+export {
+  keyword_default as default,
+};
 ```
 
 IIFE format
 
 ```js
 const _M_ = window["lib-name"];
-const _D_ = _M_.default || _M_;
-export {
-  _D_ as default,
-};
 export const foo = _M_.foo;
 export const bar = _M_.bar;
+export const keyword_default = _M_.default || _M_;
+export {
+  keyword_default as default,
+};
 ```
 
 ## API <sub><sup>(Define)</sup></sub>
 
 ```ts
-/** Lib to ESM code snippet. */
 export default function libEsmSnippet(options: {
   /**
    * lib name
@@ -73,7 +72,7 @@ export default function libEsmSnippet(options: {
   /**
    * Prevent naming conflicts
    */
-   conflictId?: string;
+  conflictId?: string;
   /**
    * Generate code snippet format
    * 
@@ -85,10 +84,12 @@ export default function libEsmSnippet(options: {
    * 
    * @default "cjs"
    */
-   format?: "cjs" | "iife";
+  format?: "cjs" | "iife";
 }): {
   snippet: string;
   /** Only `export` snippets. */
   exports: string;
+  /** Keywords alias */
+  keywords: Record<string, string>;
 }
 ```

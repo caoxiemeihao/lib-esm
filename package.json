@@ -1,0 +1,25 @@
+{
+  "name": "lib-esm-snippet",
+  "version": "0.1.0",
+  "description": "Lib to ESM code snippet.",
+  "main": "index.js",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.js"
+    }
+  },
+  "repository": "https://github.com/caoxiemeihao/lib-esm-snippet.git",
+  "author": "草鞋没号 <308487730@qq.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node test/index.mjs",
+    "prepublishOnly": "npm run build"
+  },
+  "files": [
+    "index.d.ts",
+    "index.js",
+    "index.mjs"
+  ]
+}

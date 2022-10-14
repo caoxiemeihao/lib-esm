@@ -29,14 +29,6 @@ const maps = [
     lib: 'iife',
     format: 'iife',
   },
-  {
-    lib: 'lib-name',
-    members: [
-      'foo',
-      'bar',
-    ],
-    format: 'iife'
-  }
 ];
 
 for (const opts of maps) {

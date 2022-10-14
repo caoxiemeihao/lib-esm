@@ -1,24 +1,24 @@
-# lib-esm-snippet
+# lib-esm
 
 Lib to ESM code snippet.
 
-[![NPM version](https://img.shields.io/npm/v/lib-esm-snippet.svg)](https://npmjs.org/package/lib-esm-snippet)
-[![NPM Downloads](https://img.shields.io/npm/dm/lib-esm-snippet.svg)](https://npmjs.org/package/lib-esm-snippet)
+[![NPM version](https://img.shields.io/npm/v/lib-esm.svg)](https://npmjs.org/package/lib-esm)
+[![NPM Downloads](https://img.shields.io/npm/dm/lib-esm.svg)](https://npmjs.org/package/lib-esm)
 
 ## Install
 
 ```bash
-npm i lib-esm-snippet
+npm i lib-esm
 ```
 
 ## Usage
 
 ```js
-import libEsmSnippet from 'lib-esm-snippet'
+import libEsm from 'lib-esm'
 // or
-// const libEsmSnippet = require('lib-esm-snippet')
+// const libEsm = require('lib-esm')
 
-const result = libEsmSnippet({
+const result = libEsm({
   lib: 'lib-name',
   members: [
     'foo',
@@ -60,7 +60,7 @@ export {
 ## API <sub><sup>(Define)</sup></sub>
 
 ```ts
-export default function libEsmSnippet(options: {
+export default function libEsm(options: {
   /**
    * lib name
    */

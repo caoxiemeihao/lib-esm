@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
-import libEsmSnippet from '../index.mjs';
+import libEsm from '../index.mjs';
 
 const cjs_require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -32,7 +32,7 @@ const maps = [
 ];
 
 for (const opts of maps) {
-  const result = libEsmSnippet(opts);
+  const result = libEsm(opts);
   fs.mkdirSync(destpath, { recursive: true });
   fs.writeFileSync(path.join(destpath, `${opts.lib}.mjs`), result.snippet);
 }

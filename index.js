@@ -67,7 +67,7 @@ const keywords = [
 ];
 
 /** @type {import('.')['default']} */
-module.exports = function libEsmSnippet(options) {
+module.exports = function libEsm(options) {
   const {
     lib,
     members = [],

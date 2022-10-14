@@ -1,5 +1,5 @@
 /** Lib to ESM code snippet. */
-export default function libEsmSnippet(options: {
+export default function libEsm(options: {
   /**
    * lib name
    */

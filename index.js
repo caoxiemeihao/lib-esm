@@ -92,14 +92,19 @@ const ${_M_} = window["${lib}"];
     .filter(member => keywords.includes(member))
     .map(keyword => [`keyword_${keyword}`, keyword]);
   const exports = members.filter(member => !keywords.includes(member));
-  const snippet = `
+  const defineSnippet = `
 ${importStatement}
 const ${_D_} = ${_M_}.default || ${_M_};
+`.trim();
+  const exportsSnippet = `
 export {
   ${[[_D_, 'default'], ...alias].map(([k, v]) => `${k} as ${v},`).join('\n  ')}
 };
 ${exports.map(member => `export const ${member} = ${_M_}.${member};`).join('\n')}
 `.trim();
 
-  return { snippet };
+  return {
+    snippet: `${defineSnippet}\n${exportsSnippet}`,
+    exports: exportsSnippet,
+  };
 };

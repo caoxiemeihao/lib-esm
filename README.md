@@ -88,5 +88,7 @@ export default function libEsmSnippet(options: {
    format?: "cjs" | "iife";
 }): {
   snippet: string;
+  /** Only `export` snippets. */
+  exports: string;
 }
 ```

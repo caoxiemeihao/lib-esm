@@ -1,10 +1,6 @@
 import { createRequire } from "node:module";
 const cjs_require = createRequire(import.meta.url);
 const _M_ = cjs_require("path");
-const _D_ = _M_.default || _M_;
-export {
-  _D_ as default,
-};
 export const resolve = _M_.resolve;
 export const normalize = _M_.normalize;
 export const isAbsolute = _M_.isAbsolute;
@@ -21,3 +17,7 @@ export const delimiter = _M_.delimiter;
 export const win32 = _M_.win32;
 export const posix = _M_.posix;
 export const _makeLong = _M_._makeLong;
+export const keyword_default = _M_.default || _M_;
+export {
+  keyword_default as default,
+};

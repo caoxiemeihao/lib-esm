@@ -11,7 +11,7 @@ export default function libEsmSnippet(options: {
   /**
    * Prevent naming conflicts
    */
-   conflictId?: string;
+  conflictId?: string;
   /**
    * Generate code snippet format
    * 
@@ -23,9 +23,11 @@ export default function libEsmSnippet(options: {
    * 
    * @default "cjs"
    */
-   format?: "cjs" | "iife";
+  format?: "cjs" | "iife";
 }): {
   snippet: string;
   /** Only `export` snippets. */
   exports: string;
+  /** Keywords alias */
+  keywords: Record<string, string>;
 }

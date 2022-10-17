@@ -9,15 +9,15 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const destpath = path.join(__dirname, '__snapshots__');
 fs.rmSync(destpath, { recursive: true, force: true });
 
-/** @type {Parameters<import('..')['default']>[0][]} */
+/** @type {Parameters<import('lib-esm')>[0][]} */
 const maps = [
   {
-    lib: 'path',
-    members: Object.keys(cjs_require('path')),
+    require: 'path',
+    exports: Object.keys(cjs_require('path')),
   },
   {
-    lib: './keywords',
-    members: [
+    require: './keywords',
+    exports: [
       'default',
       'delete',
       'foo',
@@ -26,7 +26,7 @@ const maps = [
     conflictId: '$$1',
   },
   {
-    lib: 'iife',
+    require: 'iife',
     format: 'iife',
   },
 ];
@@ -34,5 +34,5 @@ const maps = [
 for (const opts of maps) {
   const result = libEsm(opts);
   fs.mkdirSync(destpath, { recursive: true });
-  fs.writeFileSync(path.join(destpath, `${opts.lib}.mjs`), result.snippet);
+  fs.writeFileSync(path.join(destpath, `${opts.require}.mjs`), `${result.require}\n${result.exports}`);
 }

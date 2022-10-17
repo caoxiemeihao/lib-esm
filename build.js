@@ -1,14 +1,8 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import { createRequire } from 'node:module';
-import { fileURLToPath } from 'node:url';
+const fs = require('fs');
+const path = require('path');
+const libEsm = require('./index');
 
 // const iswatch = process.argv.slice(2).includes('--watch');
-const CJS = {
-  __filename: fileURLToPath(import.meta.url),
-  __dirname: path.dirname(fileURLToPath(import.meta.url)),
-  require: createRequire(import.meta.url),
-};
 
 /**
  * @see https://stackoverflow.com/questions/9781218/how-to-change-node-jss-console-font-color
@@ -23,11 +17,12 @@ const colours = {
   red: str => colours.$_$(31)(str),
 };
 
-const filename = path.join(CJS.__dirname, 'index.js');
+const filename = path.join(__dirname, 'index.js');
 const destname = filename.replace('.js', '.mjs');
-const members = Object.keys(CJS.require(filename));
+const members = Object.keys(require(filename));
+const result = libEsm({ require: './index.js', exports: members });
 
-fs.writeFileSync(destname, CJS.require('.')({ lib: './index.js', members }).snippet);
+fs.writeFileSync(destname, `${result.require}\n${result.exports}`);
 console.log(
   colours.cyan('[write]'),
   colours.gary(new Date().toLocaleTimeString()),

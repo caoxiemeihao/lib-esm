@@ -66,24 +66,26 @@ const keywords = [
   'yield',
 ];
 
-/** @type {import('.')['default']} */
+/** @type {import('lib-esm')} */
 module.exports = function libEsm(options) {
   const {
-    lib,
-    members = [],
+    require: require2,
+    exports: members = [],
     conflictId = '',
     format = 'cjs',
   } = options;
   const _M_ = '_M_' + conflictId;
-  const importStatement = format === 'cjs'
-    ? `
+  const requireSnippet = typeof require2 === 'undefined' ? '' : (
+    format === 'cjs'
+      ? `
 import { createRequire } from "node:module";
 const cjs_require = createRequire(import.meta.url);
-const ${_M_} = cjs_require("${lib}");
+const ${_M_} = cjs_require("${require2}");
 `.trim()
-    : `
-const ${_M_} = window["${lib}"];
-`.trim();
+      : `
+const ${_M_} = window["${require2}"];
+`.trim()
+  );
 
   !members.includes('default') && members.push('default');
 
@@ -101,7 +103,7 @@ export {
 `.trim();
 
   return {
-    snippet: `${importStatement}\n${exportsSnippet}`,
+    require: requireSnippet,
     exports: exportsSnippet,
     keywords: alias,
   };

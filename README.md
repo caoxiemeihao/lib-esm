@@ -60,17 +60,18 @@ export {
 ## API <sub><sup>(Define)</sup></sub>
 
 ```ts
-export default function libEsm(options: {
+/** Lib to ESM code snippet. */
+function libEsm(options: {
   /**
-   * lib name
+   * require id
    */
-  lib: string;
+  require?: string;
   /**
    * export members
    */
-  members?: string[];
+  exports?: string[];
   /**
-   * Prevent naming conflicts
+   * Prevent name conflicts
    */
   conflictId?: string;
   /**
@@ -86,8 +87,9 @@ export default function libEsm(options: {
    */
   format?: "cjs" | "iife";
 }): {
-  snippet: string;
-  /** Only `export` snippets. */
+  /** `require` snippets. */
+  require: string;
+  /** `export` snippets. */
   exports: string;
   /** Keywords alias */
   keywords: Record<string, string>;

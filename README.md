@@ -19,14 +19,14 @@ import libEsm from 'lib-esm'
 // const libEsm = require('lib-esm')
 
 const result = libEsm({
-  lib: 'lib-name',
-  members: [
+  require: 'lib-name',
+  exports: [
     'foo',
     'bar',
   ],
 });
 
-console.log(result.snippet);
+console.log(`${result.require}\n${result.exports}`);
 ```
 
 ###### Output

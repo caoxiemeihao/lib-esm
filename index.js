@@ -69,33 +69,28 @@ const keywords = [
 /** @type {import('lib-esm')} */
 module.exports = function libEsm(options) {
   const {
+    window,
     require: require2,
     exports: members = [],
-    conflictId = '',
-    format = 'cjs',
+    conflict = '',
   } = options;
-  const _M_ = '_M_' + conflictId;
-  const requireSnippet = typeof require2 === 'undefined' ? '' : (
-    format === 'cjs'
-      ? `
+  const _M_ = '_M_' + conflict;
+  const windowSnippet = window == null ? '' : `const ${_M_} = window["${window}"];`;
+  const requireSnippet = require2 == null ? '' : `
 import { createRequire } from "node:module";
-const cjs_require = createRequire(import.meta.url);
-const ${_M_} = cjs_require("${require2}");
-`.trim()
-      : `
-const ${_M_} = window["${require2}"];
-`.trim()
-  );
+const ${_M_} = createRequire(import.meta.url)("${require2}");
+`.trim();
 
   !members.includes('default') && members.push('default');
 
   const alias = members
     .filter(member => keywords.includes(member))
-    .reduce((memo, keyword) => Object.assign(memo, { [keyword]: `keyword_${keyword + conflictId}` }), {});
+    .reduce((memo, keyword) => Object.assign(memo, { [keyword]: `keyword_${keyword + conflict}` }), {});
   const exportsSnippet = `
 ${members.map(member => {
+    const LV = alias[member] ? `const ${alias[member]}` : `export const ${member}`;
     const RV = member === 'default' ? `${_M_}.default || ${_M_}` : `${_M_}.${member}`;
-    return `export const ${alias[member] || member} = ${RV};`;
+    return `${LV} = ${RV};`;
   }).join('\n')}
 export {
   ${Object.entries(alias).map(([member, alias]) => `${alias} as ${member},`).join('\n  ')}
@@ -103,6 +98,7 @@ export {
 `.trim();
 
   return {
+    window: windowSnippet,
     require: requireSnippet,
     exports: exportsSnippet,
     keywords: alias,

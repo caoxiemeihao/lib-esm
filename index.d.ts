@@ -2,6 +2,10 @@ declare module 'lib-esm' {
   /** Lib to ESM code snippet. */
   function libEsm(options: {
     /**
+     * IIFE name
+     */
+    window?: string;
+    /**
      * require id
      */
     require?: string;
@@ -12,21 +16,11 @@ declare module 'lib-esm' {
     /**
      * Prevent name conflicts
      */
-    conflictId?: string;
-    /**
-     * Generate code snippet format
-     * 
-     * 🌰 e.g.
-     * ```js
-     * const _M_ = require("lib") // cjs
-     * const _M_ = window["lib"] // iife
-     * ```
-     * 
-     * @default "cjs"
-     */
-    format?: "cjs" | "iife";
+    conflict?: string;
   }): {
-    /** `require` snippets. */
+    /** `window[iife-name]` snippets. */
+    window: string;
+    /** `require(id)` snippets. */
     require: string;
     /** `export` snippets. */
     exports: string;

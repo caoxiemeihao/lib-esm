@@ -1,7 +1,7 @@
 {
   "name": "lib-esm",
-  "version": "0.2.0",
-  "description": "Lib to ESM code snippet.",
+  "version": "0.3.0",
+  "description": "Lib to ESM snippet.",
   "main": "index.js",
   "exports": {
     ".": {

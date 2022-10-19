@@ -1,6 +1,6 @@
 # lib-esm
 
-Lib to ESM code snippet.
+Lib to ESM snippet.
 
 [![NPM version](https://img.shields.io/npm/v/lib-esm.svg)](https://npmjs.org/package/lib-esm)
 [![NPM Downloads](https://img.shields.io/npm/dm/lib-esm.svg)](https://npmjs.org/package/lib-esm)
@@ -19,39 +19,37 @@ import libEsm from 'lib-esm'
 // const libEsm = require('lib-esm')
 
 const result = libEsm({
+  window: 'lib-name',
   require: 'lib-name',
   exports: [
     'foo',
     'bar',
   ],
-});
+})
 
-console.log(`${result.require}\n${result.exports}`);
+console.log(`${result.window}\n${result.exports}`)
+console.log(`${result.require}\n${result.exports}`)
 ```
 
-###### Output
-
-CommonJs format
-
-```js
-import { createRequire } from "node:module";
-const cjs_require = createRequire(import.meta.url);
-const _M_ = cjs_require("lib-name");
-export const foo = _M_.foo;
-export const bar = _M_.bar;
-export const keyword_default = _M_.default || _M_;
-export {
-  keyword_default as default,
-};
-```
-
-IIFE format
+**result.window**
 
 ```js
 const _M_ = window["lib-name"];
+```
+
+**result.require**
+
+```js
+import { createRequire } from "node:module";
+const _M_ = createRequire(import.meta.url)("lib-name");
+```
+
+**result.exports**
+
+```js
 export const foo = _M_.foo;
 export const bar = _M_.bar;
-export const keyword_default = _M_.default || _M_;
+const keyword_default = _M_.default || _M_;
 export {
   keyword_default as default,
 };
@@ -63,6 +61,10 @@ export {
 /** Lib to ESM code snippet. */
 function libEsm(options: {
   /**
+   * IIFE name
+   */
+  window?: string;
+  /**
    * require id
    */
   require?: string;
@@ -73,21 +75,11 @@ function libEsm(options: {
   /**
    * Prevent name conflicts
    */
-  conflictId?: string;
-  /**
-   * Generate code snippet format
-   * 
-   * 🌰 e.g.
-   * ```js
-   * const _M_ = require("lib") // cjs
-   * const _M_ = window["lib"] // iife
-   * ```
-   * 
-   * @default "cjs"
-   */
-  format?: "cjs" | "iife";
+  conflict?: string;
 }): {
-  /** `require` snippets. */
+  /** `window[iife-name]` snippets. */
+  window: string;
+  /** `require(id)` snippets. */
   require: string;
   /** `export` snippets. */
   exports: string;

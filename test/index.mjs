@@ -3,8 +3,9 @@ import path from 'node:path';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import { strict as assert } from 'node:assert';
-import libEsm from '../index.mjs';
+import libEsm from '../dist/index.mjs';
 
+const TAG = '[test]';
 const cjs_require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const destpath = path.join(__dirname, '__snapshots__');
@@ -47,3 +48,5 @@ for (const key of esmkeys) {
   if (key === 'default') continue;
   assert.equal(cjskeys.includes(key), true);
 }
+
+console.log(TAG, 'index.mjs passed ✅')

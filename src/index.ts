@@ -56,7 +56,7 @@ const keywords = [
   'with',
 ]
 
-/** Lib to ESM code snippet. */
+/** Lib to ESM code snippets */
 export default function libEsm(options: Options) {
   const {
     window,
@@ -88,9 +88,13 @@ export {
 `.trim()
 
   return {
+    /** `window[iife-name]` snippets */
     window: windowSnippet,
+    /** `require(id)` snippets */
     require: requireSnippet,
+    /** `export` snippets */
     exports: exportsSnippet,
+    /** Keywords alias */
     keywords: alias,
   }
 }

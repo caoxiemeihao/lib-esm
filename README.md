@@ -16,7 +16,7 @@ npm i lib-esm
 ```js
 import libEsm from 'lib-esm'
 // or
-// const libEsm = require('lib-esm')
+// const libEsm = require('lib-esm').default
 
 const result = libEsm({
   window: 'lib-name',
@@ -58,7 +58,7 @@ export {
 ## API <sub><sup>(Define)</sup></sub>
 
 ```ts
-/** Lib to ESM code snippet. */
+/** Lib to ESM code snippets */
 function libEsm(options: {
   /**
    * IIFE name
@@ -77,11 +77,11 @@ function libEsm(options: {
    */
   conflict?: string;
 }): {
-  /** `window[iife-name]` snippets. */
+  /** `window[iife-name]` snippets */
   window: string;
-  /** `require(id)` snippets. */
+  /** `require(id)` snippets */
   require: string;
-  /** `export` snippets. */
+  /** `export` snippets */
   exports: string;
   /** Keywords alias */
   keywords: Record<string, string>;

@@ -49,4 +49,4 @@ for (const key of esmkeys) {
   assert.equal(cjskeys.includes(key), true);
 }
 
-console.log(TAG, 'index.mjs passed ✅')
+console.log(TAG, 'index.mjs passed ✅');

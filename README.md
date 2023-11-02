@@ -18,7 +18,7 @@ import libEsm from 'lib-esm'
 // or
 // const libEsm = require('lib-esm').default
 
-const result = libEsm({
+const snippets = libEsm({
   window: 'lib-name',
   require: 'lib-name',
   exports: [
@@ -27,24 +27,24 @@ const result = libEsm({
   ],
 })
 
-console.log(`${result.window}\n${result.exports}`)
-console.log(`${result.require}\n${result.exports}`)
+console.log(`${snippets.window}\n${snippets.exports}`)
+console.log(`${snippets.require}\n${snippets.exports}`)
 ```
 
-**result.window**
+**snippets.window**
 
 ```js
 const _M_ = window["lib-name"];
 ```
 
-**result.require**
+**snippets.require**
 
 ```js
 import { createRequire } from "node:module";
 const _M_ = createRequire(import.meta.url)("lib-name");
 ```
 
-**result.exports**
+**snippets.exports**
 
 ```js
 export const foo = _M_.foo;

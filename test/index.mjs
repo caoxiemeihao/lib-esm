@@ -35,10 +35,10 @@ const maps = [
 ];
 
 for (const opts of maps) {
-  const result = libEsm(opts);
+  const snippets = libEsm(opts);
   const key = opts.window ? 'window' : 'require'
   const filename = path.join(destpath, `${opts[key]}.mjs`);
-  fs.writeFileSync(filename, `${result[key]}\n${result.exports}`);
+  fs.writeFileSync(filename, `${snippets[key]}\n${snippets.exports}`);
 }
 
 const pathESM = await import('./__snapshots__/path.mjs');

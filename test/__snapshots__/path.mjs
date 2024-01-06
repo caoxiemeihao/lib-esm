@@ -1,5 +1,5 @@
-import { createRequire } from "node:module";
-const _M_ = createRequire(import.meta.url)("path");
+import _M_node_module from "node:module";
+const _M_ = _M_node_module.createRequire(import.meta.url)("path");
 export const resolve = _M_.resolve;
 export const normalize = _M_.normalize;
 export const isAbsolute = _M_.isAbsolute;

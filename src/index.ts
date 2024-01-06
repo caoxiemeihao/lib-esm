@@ -116,8 +116,8 @@ export default function libEsm(options: Options) {
   const _M_ = '_M_' + conflict
   const windowSnippet = window == null ? '' : `const ${_M_} = window["${window}"];`
   const requireSnippet = require2 == null ? '' : `
-import { createRequire } from "node:module";
-const ${_M_} = createRequire(import.meta.url)("${require2}");
+import _M_node_module from "node:module";
+const ${_M_} = _M_node_module.createRequire(import.meta.url)("${require2}");
 `.trim()
 
   !members.includes('default') && members.push('default')

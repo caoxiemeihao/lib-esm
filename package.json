@@ -1,7 +1,7 @@
 {
   "name": "lib-esm",
-  "version": "0.4.1",
-  "description": "Lib to ESM snippet.",
+  "version": "0.4.2",
+  "description": "A tiny `esm` snippets interop lib",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -13,7 +13,7 @@
     "./*": "./*"
   },
   "repository": "https://github.com/caoxiemeihao/lib-esm.git",
-  "author": "草鞋没号 <308487730@qq.com>",
+  "author": "Leo Wang(草鞋没号) <308487730@qq.com>",
   "license": "MIT",
   "scripts": {
     "dev": "vite build --watch",

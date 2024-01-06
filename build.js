@@ -20,9 +20,9 @@ const colours = {
 const filename = path.join(__dirname, 'index.js');
 const destname = filename.replace('.js', '.mjs');
 const members = Object.keys(require(filename));
-const result = libEsm({ require: './index.js', exports: members });
+const snippets = libEsm({ require: './index.js', exports: members });
 
-fs.writeFileSync(destname, `${result.require}\n${result.exports}`);
+fs.writeFileSync(destname, `${snippets.require}\n${snippets.exports}`);
 console.log(
   colours.cyan('[write]'),
   colours.gary(new Date().toLocaleTimeString()),
